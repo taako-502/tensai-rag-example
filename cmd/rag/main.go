@@ -9,10 +9,15 @@ import (
 	"strings"
 	"time"
 
+	"github.com/joho/godotenv"
 	"github.com/taako-502/tensai-rag-example/internal/rag"
 )
 
 func main() {
+	if err := loadDotEnv(".env"); err != nil {
+		exit(err)
+	}
+
 	docsDir := flag.String("docs", "./docs", "knowledge-base directory")
 	endpoint := flag.String("endpoint", envOr("TENSAI_ENDPOINT", "http://127.0.0.1:8080"), "tensai server URL")
 	topK := flag.Int("top-k", 3, "number of chunks to retrieve")
@@ -70,6 +75,13 @@ func main() {
 	for i, result := range results {
 		fmt.Printf("[%d] %s (score: %.4f)\n", i+1, result.Chunk.Source, result.Score)
 	}
+}
+
+func loadDotEnv(path string) error {
+	if err := godotenv.Load(path); err != nil && !os.IsNotExist(err) {
+		return fmt.Errorf("load %s: %w", path, err)
+	}
+	return nil
 }
 
 func envOr(name, fallback string) string {
