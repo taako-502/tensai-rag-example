@@ -22,7 +22,7 @@ type Chunk struct {
 	Text   string
 }
 
-// LoadDocumentsは、指定ディレクトリ内のMarkdownとテキストファイルを読み込みます。
+// LoadDocumentsは、指定ディレクトリ（デフォルト: ./docs）内のMarkdownとテキストファイルを読み込みます。
 func LoadDocuments(root string) ([]Document, error) {
 	var docs []Document
 	err := filepath.WalkDir(root, func(path string, entry fs.DirEntry, err error) error {
