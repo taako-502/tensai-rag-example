@@ -41,6 +41,10 @@ go run github.com/mattn/tensai/cmd/tensai@v0.0.26 serve \
   -model ./path/to/model.gguf \
   -q8 \
   -addr 127.0.0.1:8080
+
+
+# モデルを指定せずに起動するのであれば以下でも問題ありません
+go run github.com/mattn/tensai/cmd/tensai@v0.0.26 serve -addr 127.0.0.1:8080
 ```
 
 別のターミナルでRAG CLIを実行します。
