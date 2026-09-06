@@ -45,6 +45,7 @@ func NewVectorizer(texts []string) *Vectorizer {
 	return v
 }
 
+// Transformは、テキストをTF-IDFベクトルに変換します。
 func (v *Vectorizer) Transform(text string) []tensai.Float {
 	vector := make([]tensai.Float, len(v.vocabulary))
 	for _, token := range tokenize(text) {
