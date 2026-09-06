@@ -30,6 +30,7 @@ func NewRetriever(chunks []Chunk) *Retriever {
 	return &Retriever{chunks: chunks, vectors: vectors, vectorizer: vectorizer}
 }
 
+// Searchは、クエリに関連するチャンクを検索します。
 func (r *Retriever) Search(query string, topK int) []Result {
 	if topK <= 0 {
 		return nil

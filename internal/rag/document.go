@@ -22,7 +22,7 @@ type Chunk struct {
 	Text   string
 }
 
-// LoadDocuments recursively loads Markdown and text files.
+// LoadDocumentsは、指定ディレクトリ内のMarkdownとテキストファイルを読み込みます。
 func LoadDocuments(root string) ([]Document, error) {
 	var docs []Document
 	err := filepath.WalkDir(root, func(path string, entry fs.DirEntry, err error) error {
@@ -57,8 +57,7 @@ func LoadDocuments(root string) ([]Document, error) {
 	return docs, nil
 }
 
-// SplitDocuments splits documents at paragraph boundaries and then enforces
-// maxRunes. Small adjacent paragraphs are grouped into one chunk.
+// SplitDocumentsは、文書を指定された文字数以内のチャンクに分割します。
 func SplitDocuments(docs []Document, maxRunes int) []Chunk {
 	if maxRunes <= 0 {
 		maxRunes = 600

@@ -34,6 +34,7 @@ type chatResponse struct {
 	} `json:"choices"`
 }
 
+// Generateは、検索結果をもとにtensaiサーバーで回答を生成します。
 func (g Generator) Generate(ctx context.Context, question string, results []Result) (string, error) {
 	var contextText strings.Builder
 	for i, result := range results {
