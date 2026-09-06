@@ -35,9 +35,11 @@ func (r *Retriever) Search(query string, topK int) []Result {
 	if topK <= 0 {
 		return nil
 	}
+	// queryVector は、検索クエリの正規化済みベクトル
 	queryVector := r.vectorizer.Transform(query)
 	results := make([]Result, 0, len(r.chunks))
 	for i, vector := range r.vectors {
+		// 正規化済みベクトルの内積からコサイン類似度を計算します。
 		score := float32(tensai.DotVec(queryVector, vector))
 		if score > 0 {
 			results = append(results, Result{Chunk: r.chunks[i], Score: score})
